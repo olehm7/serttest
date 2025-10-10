@@ -269,7 +269,16 @@ dateInput.value = today;
 dateInput.min = today;
 const maxDate = new Date(new Date().setDate(new Date().getDate() + 30)).toISOString().split('T')[0];
 dateInput.max = maxDate;
-
+const phoneInput = form.querySelector('input[name="phone"]');
+// Фіксація +380 на початку
+phoneInput.value = '+380 '; // Початкове значення
+phoneInput.addEventListener('input', function(e) {
+    let val = e.target.value.replace(/\D/g, ''); // Видаляємо все нецифрове
+    if (val.startsWith('380')) val = val.slice(3); // Якщо ввели 380, видаляємо префікс
+    else if (val.startsWith('0')) val = val.slice(1); // Якщо 0, видаляємо для UA номерів
+    if (val.length > 9) val = val.slice(0, 9); // Обмежуємо 9 цифр після +380
+    e.target.value = '+380 (' + val.slice(0,2) + ') ' + val.slice(2,5) + '-' + val.slice(5,7) + '-' + val.slice(7,9);
+});
                         form.addEventListener('submit', async (e) => {
                             e.preventDefault();
                             msg.style.display = 'none';
@@ -349,6 +358,7 @@ dateInput.max = maxDate;
 </body>
 
 </html>
+
 
 
 
