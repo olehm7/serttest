@@ -216,142 +216,121 @@
             </div>
         </section>
 
-        <section id="contact" class="section contact">
-            <div class="container contact__inner">
-                <div class="contact__content">
-                    <header class="section__header">
-                        <p class="section__eyebrow">Зв'яжіться з нами</p>
-                        <h2 class="section__title">Запис на техогляд або сертифікацію</h2>
-                        <p class="section__subtitle">
-                            Залиште заявку, і фахівець підтвердить час візиту протягом 15 хвилин у робочий час.
-                        </p>
-                    </header>
-                    <form id="contact-form" class="contact-form" action="https://formspree.io/f/mrbyaavd" method="POST" novalidate>
-                        <!-- Мова повідомлень -->
-                        <input type="hidden" name="_language" value="uk">
+<section id="contact" class="section contact">
+    <div class="container">
+        <header class="section__header">
+            <p class="section__eyebrow">Зв'яжіться з нами</p>
+            <h2 class="section__title">Запис на техогляд або сертифікацію</h2>
+            <p class="section__subtitle">
+                Залиште заявку, і фахівець підтвердить час візиту протягом 15 хвилин у робочий час.
+            </p>
+        </header>
+        <div class="contact__inner">
+            <div class="contact__content">
+                <form id="contact-form" class="contact-form" action="https://formspree.io/f/mrbyaavd" method="POST" novalidate>
+                    <input type="hidden" name="_language" value="uk">
+                    <label class="field">
+                        <span>Ім'я</span>
+                        <input type="text" name="name" placeholder="Олександр" required />
+                    </label>
+                    <label class="field">
+                        <span>Телефон</span>
+                        <input type="tel" name="phone" placeholder="+380 (__) ___-__-__" required />
+                    </label>
+                    <label class="field">
+                        <span>Вид послуги</span>
+                        <select name="vehicle" required>
+                            <option>Техогляд</option>
+                            <option>Сертифікація</option>
+                            <option>Сертифікація ГБО</option>
+                        </select>
+                    </label>
+                    <label class="field">
+                        <span>Бажана дата техогляду</span>
+                        <input type="date" name="date" required />
+                    </label>
+                    <label class="field">
+                        <span>Коментар</span>
+                        <textarea name="message" rows="2" placeholder="Опишіть побажання, напр. 'ГБО на Skoda Octavia'"></textarea>
+                    </label>
+                    <button type="submit" class="button button--primary">Надіслати заявку</button>
+                </form>
+                <p id="form-message" style="display:none; margin-top:12px; font-weight:600;"></p>
+                <script>
+                    (function() {
+                        const form = document.getElementById('contact-form');
+                        const msg = document.getElementById('form-message');
+                        const submitBtn = form.querySelector('button[type="submit"]');
 
-                        <label class="field">
-                            <span>Ім'я</span>
-                            <input type="text" name="name" placeholder="Олександр" required />
-                        </label>
-
-                        <label class="field">
-                            <span>Телефон</span>
-                            <input type="tel" name="phone" placeholder="+380 (__) ___-__-__" required />
-                        </label>
-
-                        <label class="field">
-                            <span>Вид послуги</span>
-                            <select name="vehicle">
-                                <option>Техогляд</option>
-                                <option>Сертифікація</option>
-                                <option>Сертифікація ГБО</option>
-                            </select>
-                        </label>
-
-                        <label class="field">
-                            <span>Бажана дата техогляду</span>
-                            <input type="date" name="date" required />
-                        </label>
-
-                        <label class="field">
-                            <span>Коментар</span>
-                            <textarea name="message" rows="3" placeholder="Опишіть побажання"></textarea>
-                        </label>
-
-                        <button type="submit" class="button button--primary">Надіслати заявку</button>
-                    </form>
-
-                    <!-- Місце для повідомлення -->
-                    <p id="form-message" style="display:none; margin-top:12px; font-weight:600;"></p>
-
-                    <script>
-                        (function() {
-                            const form = document.getElementById('contact-form');
-                            const msg = document.getElementById('form-message');
-                            const submitBtn = form.querySelector('button[type="submit"]');
-
-                            form.addEventListener('submit', async (e) => {
-                                e.preventDefault();
-
-                                // UI: стан "відправляю"
-                                msg.style.display = 'none';
-                                const originalText = submitBtn.textContent;
-                                submitBtn.disabled = true;
-                                submitBtn.textContent = 'Відправляємо…';
-
-                                try {
-                                    const data = new FormData(form);
-                                    const response = await fetch(form.action, {
-                                        method: form.method,
-                                        body: data,
-                                        headers: {
-                                            'Accept': 'application/json'
-                                        }
-                                    });
-
-                                    if (response.ok) {
-                                        form.reset();
-                                        msg.textContent = '✅ Заявку надіслано! Фахівець зв’яжеться з вами найближчим часом.';
-                                        msg.style.color = 'green';
-                                        msg.style.display = 'block';
-                                    } else {
-                                        msg.textContent = '⚠️ Сталася помилка під час відправки. Спробуйте ще раз або зателефонуйте.';
-                                        msg.style.color = 'red';
-                                        msg.style.display = 'block';
-                                    }
-                                } catch (err) {
-                                    msg.textContent = '❌ Не вдалося надіслати. Перевірте інтернет-з’єднання та спробуйте ще раз.';
+                        form.addEventListener('submit', async (e) => {
+                            e.preventDefault();
+                            msg.style.display = 'none';
+                            const originalText = submitBtn.textContent;
+                            submitBtn.disabled = true;
+                            submitBtn.textContent = 'Відправляємо…';
+                            try {
+                                const data = new FormData(form);
+                                const response = await fetch(form.action, {
+                                    method: form.method,
+                                    body: data,
+                                    headers: { 'Accept': 'application/json' }
+                                });
+                                if (response.ok) {
+                                    form.reset();
+                                    msg.textContent = '✅ Заявку надіслано! Фахівець зв’яжеться з вами найближчим часом.';
+                                    msg.style.color = 'green';
+                                    msg.style.display = 'block';
+                                } else {
+                                    msg.textContent = '⚠️ Сталася помилка під час відправки. Спробуйте ще раз або зателефонуйте.';
                                     msg.style.color = 'red';
                                     msg.style.display = 'block';
-                                } finally {
-                                    submitBtn.disabled = false;
-                                    submitBtn.textContent = originalText;
                                 }
-                            });
-                        })();
-                    </script>
-
-                    <noscript>
-                        Для відправки форми без JavaScript ви будете перенаправлені на сторінку підтвердження Formspree.
-                    </noscript>
-                </div>
-                <aside class="contact__details">
-                    <h3>Контакти</h3>
-                    <ul>
-                        <li>
-                            <strong>Львів (вул. Конюшинна, 2б)</strong><br />
-                            📍 <a href="https://www.google.com/maps?q=м.+Львів,+вул.+Конюшинна,+2б" target="_blank" rel="noopener noreferrer">Відкрити на мапі</a><br />
-                            <a href="tel:+380965565505">+38 (096) 556-55-05</a>
-                        </li>
-
-                        <li>
-                            <strong>Львів (вул. Хоткевича, 68)</strong><br />
-                            📍 <a href="https://www.google.com/maps?q=м.+Львів,+вул.+Хоткевича,+68" target="_blank" rel="noopener noreferrer">Відкрити на мапі</a><br />
-                            <a href="tel:+380688005505">+38 (068) 800-55-05</a>
-                        </li>
-
-                        <li>
-                            <strong>Мукачево (вул. Володимира Данчевського, 12)</strong><br />
-                            📍 <a href="https://www.google.com/maps?q=м.+Мукачево,+вул.+Володимира+Данчевського,+12" target="_blank" rel="noopener noreferrer">Відкрити на мапі</a><br />
-                            <a href="tel:+380666535505">+38 (066) 653-55-05</a>
-                        </li>
-
-                        <li>
-                            <strong>с. Дуліби (вул. Тараса Шевченка, 265)</strong><br />
-                            📍 <a href="https://www.google.com/maps?q=с.+Дуліби,+вул.+Тараса+Шевченка,+265" target="_blank" rel="noopener noreferrer">Відкрити на мапі</a><br />
-                            <a href="tel:+380685515505">+38 (068) 551-55-05</a>
-                        </li>
-
-                        <li>
-                            <strong>Івано-Франківськ (вул. Крихівецька, 2в)</strong><br />
-                            📍 <a href="https://www.google.com/maps?q=м.+Івано-Франківськ,+вул.+Крихівецька,+2в" target="_blank" rel="noopener noreferrer">Відкрити на мапі</a><br />
-                             <a href="tel:+380992925505">+38 (099) 292-55-05</a>
-                        </li>
-                    </ul>
-                </aside>
+                            } catch (err) {
+                                msg.textContent = '❌ Не вдалося надіслати. Перевірте інтернет-з’єднання та спробуйте ще раз.';
+                                msg.style.color = 'red';
+                                msg.style.display = 'block';
+                            } finally {
+                                submitBtn.disabled = false;
+                                submitBtn.textContent = originalText;
+                            }
+                        });
+                    })();
+                </script>
+                <noscript>Для відправки форми без JavaScript ви будете перенаправлені на сторінку підтвердження Formspree.</noscript>
             </div>
-        </section>
+            <aside class="contact__details">
+                <h3>Контакти</h3>
+                <ul>
+                    <li>
+                        <strong>Львів (вул. Конюшинна, 2б)</strong><br />
+                        📍 <a href="https://www.google.com/maps?q=м.+Львів,+вул.+Конюшинна,+2б" target="_blank" rel="noopener noreferrer">Відкрити на мапі</a><br />
+                        <a href="tel:+380965565505">+38 (096) 556-55-05</a>
+                    </li>
+                    <li>
+                        <strong>Львів (вул. Хоткевича, 68)</strong><br />
+                        📍 <a href="https://www.google.com/maps?q=м.+Львів,+вул.+Хоткевича,+68" target="_blank" rel="noopener noreferrer">Відкрити на мапі</a><br />
+                        <a href="tel:+380688005505">+38 (068) 800-55-05</a>
+                    </li>
+                    <li>
+                        <strong>Мукачево (вул. Володимира Данчевського, 12)</strong><br />
+                        📍 <a href="https://www.google.com/maps?q=м.+Мукачево,+вул.+Володимира+Данчевського,+12" target="_blank" rel="noopener noreferrer">Відкрити на мапі</a><br />
+                        <a href="tel:+380666535505">+38 (066) 653-55-05</a>
+                    </li>
+                    <li>
+                        <strong>с. Дуліби (вул. Тараса Шевченка, 265)</strong><br />
+                        📍 <a href="https://www.google.com/maps?q=с.+Дуліби,+вул.+Тараса+Шевченка,+265" target="_blank" rel="noopener noreferrer">Відкрити на мапі</a><br />
+                        <a href="tel:+380685515505">+38 (068) 551-55-05</a>
+                    </li>
+                    <li>
+                        <strong>Івано-Франківськ (вул. Крихівецька, 2в)</strong><br />
+                        📍 <a href="https://www.google.com/maps?q=м.+Івано-Франківськ,+вул.+Крихівецька,+2в" target="_blank" rel="noopener noreferrer">Відкрити на мапі</a><br />
+                        <a href="tel:+380992925505">+38 (099) 292-55-05</a>
+                    </li>
+                </ul>
+            </aside>
+        </div>
+    </div>
+</section>
     </main>
 
     <footer class="site-footer">
