@@ -586,3 +586,22 @@ img {
     padding: 8px 16px; /* Стискаємо кнопку — менше простору навколо тексту */
   }
 }
+@media (min-width: 881px) {
+  .section__subtitle {
+    margin-bottom: 12px; /* Зменшуємо відступ підзаголовка (було ~24px) — форма піднімається ближче */
+  }
+  
+  .contact-form {
+    gap: 10px; /* Зменшуємо відстань між полями (було 12px) — менше порожніх просторів між label/input */
+  }
+  
+  .field {
+    gap: 4px; /* Зменшуємо відступ між <span> (лейбл) та input (було 8px) — лейбли "притискаються" до полів */
+  }
+  
+  .field input,
+  .field select,
+  .field textarea {
+    margin-top: 0; /* Видаляємо будь-який дефолтний top-margin у полях */
+  }
+}
