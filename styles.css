@@ -562,3 +562,27 @@ img {
     scroll-margin-top: var(--header-h);
   }
 }
+
+@media (min-width: 881px) {
+  .contact-form {
+    gap: 12px; /* Зменшуємо відстань між полями (було 18px) — менше порожніх просторів */
+  }
+  
+  .field input,
+  .field select,
+  .field textarea {
+    padding: 8px 12px; /* Стискаємо внутрішній простір у полях (було 12px 14px) — поля компактніші */
+  }
+  
+  .field textarea {
+    min-height: 60px; /* Стискаємо textarea (було 120px) — менше "повітря" під коментарем */
+  }
+  
+  #form-message {
+    margin-top: 8px; /* Менший відступ для повідомлення після submit */
+  }
+  
+  .button--primary {
+    padding: 8px 16px; /* Стискаємо кнопку — менше простору навколо тексту */
+  }
+}
