@@ -554,7 +554,7 @@ img {
 
 @media (max-width: 880px) {
   :root {
-    --header-h: 100px; /* висота вашого хедера на мобільному */
+    --header-h: 100px; 
     scroll-padding-top: var(--header-h);
   }
 
@@ -565,43 +565,43 @@ img {
 
 @media (min-width: 881px) {
   .contact-form {
-    gap: 12px; /* Зменшуємо відстань між полями (було 18px) — менше порожніх просторів */
+    gap: 12px; 
   }
   
   .field input,
   .field select,
   .field textarea {
-    padding: 8px 12px; /* Стискаємо внутрішній простір у полях (було 12px 14px) — поля компактніші */
+    padding: 8px 12px; 
   }
   
   .field textarea {
-    min-height: 60px; /* Стискаємо textarea (було 120px) — менше "повітря" під коментарем */
+    min-height: 60px; 
   }
   
   #form-message {
-    margin-top: 8px; /* Менший відступ для повідомлення після submit */
+    margin-top: 8px; 
   }
   
   .button--primary {
-    padding: 8px 16px; /* Стискаємо кнопку — менше простору навколо тексту */
+    padding: 8px 16px; 
   }
 }
 @media (min-width: 881px) {
   .section__subtitle {
-    margin-bottom: 12px; /* Зменшуємо відступ підзаголовка (було ~24px) — форма піднімається ближче */
+    margin-bottom: 12px; 
   }
   
   .contact-form {
-    gap: 10px; /* Зменшуємо відстань між полями (було 12px) — менше порожніх просторів між label/input */
+    gap: 10px; 
   }
   
   .field {
-    gap: 4px; /* Зменшуємо відступ між <span> (лейбл) та input (було 8px) — лейбли "притискаються" до полів */
+    gap: 4px; 
   }
   
   .field input,
   .field select,
   .field textarea {
-    margin-top: 0; /* Видаляємо будь-який дефолтний top-margin у полях */
+    margin-top: 0; 
   }
 }
