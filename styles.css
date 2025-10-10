@@ -562,3 +562,35 @@ img {
     scroll-margin-top: var(--header-h);
   }
 }
+@media (min-width: 881px) {
+  .contact__inner {
+    grid-template-columns: 1fr 380px; /* Форма зліва гнучка, контакти фіксовані (стискаємо праву колонку) */
+    gap: 40px;
+    align-items: start; /* Вирівнювання по верху — паралельно */
+  }
+  
+  .contact-form {
+    gap: 12px; /* Стискаємо відстань між полями (було 18px) */
+  }
+  
+  .field textarea {
+    min-height: 80px; /* Стискаємо коментар (було 120px) */
+    rows: 2; /* Фіксуємо 2 рядки */
+  }
+  
+  .button--primary {
+    padding: 10px 20px; /* Стискаємо кнопку (менше padding) */
+    font-size: 15px; /* Трохи менший шрифт для компактності */
+  }
+  
+  .contact__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Форма не розтягується вниз */
+  }
+  
+  .contact__details {
+    max-height: 420px; /* Обмежуємо висоту контактів, якщо список довгий (опціонально, для паралельності) */
+    overflow-y: auto; /* Скрол, якщо потрібно */
+  }
+}
