@@ -113,6 +113,53 @@ img {
   transition: background-color 0.2s ease;
 }
 
+/* === Phone CTA in header === */
+.header-phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background-color: var(--color-primary);
+  color: var(--color-surface);
+  box-shadow: 0 6px 14px rgba(26, 84, 181, 0.18);
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+.header-phone:hover,
+.header-phone:focus-visible {
+  background-color: var(--color-primary-dark);
+  text-decoration: none;
+  transform: translateY(-1px);
+}
+.header-phone__icon {
+  font-size: 16px;
+  line-height: 1;
+}
+.header-phone__label {
+  letter-spacing: 0.01em;
+}
+
+/* Layout tweaks so phone CTA sits nicely in the header across breakpoints */
+.site-header__inner {
+  gap: 16px;
+}
+@media (max-width: 880px) {
+  .site-header__inner {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .header-phone {
+    width: 100%;
+    justify-content: center;
+    padding: 12px 18px;
+    box-shadow: var(--shadow-soft);
+  }
+}
+
+
+
 .main-nav__cta:hover,
 .main-nav__cta:focus-visible {
   background-color: var(--color-primary-dark);
@@ -140,7 +187,7 @@ img {
 }
 
 .hero__title {
-  font-size: clamp(32px, 4vw, 44px);
+  font-size: clamp(32px, 4vw, 36px);
   line-height: 1.1;
   margin: 0 0 18px;
 }
@@ -204,7 +251,7 @@ img {
 }
 
 .section {
-  padding: 70px 0;
+  padding: 50px 0;
 }
 
 .section--muted {
@@ -303,21 +350,19 @@ img {
   position: relative;
 }
 
-.process li::before {
-  counter-increment: step;
-  content: counter(step);
-  position: absolute;
-  top: 24px;
-  left: -12px; /* зсуваємо кружок вліво */
-  width: 32px;
-  height: 32px;
+.step {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-right: 10px;
   border-radius: 50%;
   background-color: var(--color-accent);
   color: #2a2f3a;
   font-weight: 700;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);}
+  font-variant-numeric: tabular-nums;
+}
 
 .process h3 {
   margin-top: 0;
@@ -479,5 +524,40 @@ img {
 
   .contact__inner {
     gap: 30px;
+  }
+}
+
+.button--primary:hover,
+.button--primary:focus-visible,
+.button--ghost:hover,
+.button--ghost:focus-visible {
+  text-decoration: none;
+}
+
+/* Точне підлаштування під телефон */
+@media (max-width: 600px) {
+  }
+
+.header-phone--link {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+.header-phone--link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 880px) {
+  :root {
+    --header-h: 100px; /* висота вашого хедера на мобільному */
+    scroll-padding-top: var(--header-h);
+  }
+
+  [id] {
+    scroll-margin-top: var(--header-h);
   }
 }
