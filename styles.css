@@ -405,14 +405,14 @@ img {
 
 .contact-form {
   display: grid;
-  gap: 18px;
+  gap: 12px; /* Зменшено для компактності */
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  font-size: 14px;
+  gap: 6px; /* Зменшено */
+  font-size: 13px; /* Трохи менше тексту */
 }
 
 .field span {
@@ -423,8 +423,8 @@ img {
 .field select,
 .field textarea {
   font: inherit;
-  padding: 12px 14px;
-  border-radius: 12px;
+  padding: 10px 12px; /* Стиснуто */
+  border-radius: 10px;
   border: 1px solid var(--color-border);
   background-color: var(--color-surface);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
@@ -432,47 +432,65 @@ img {
 
 .field textarea {
   resize: vertical;
-  min-height: 120px;
+  min-height: 80px; /* Коротша */
+  rows: 2;
 }
 
 .field input:focus-visible,
 .field select:focus-visible,
 .field textarea:focus-visible {
   border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(26, 84, 181, 0.15);
+  box-shadow: 0 0 0 2px rgba(26, 84, 181, 0.15); /* Менший шедоу */
   outline: none;
 }
 
-.contact__details {
-  background-color: var(--color-surface);
-  border-radius: 20px;
-  padding: 28px;
-  box-shadow: var(--shadow-soft);
+/* Кнопка компактніша */
+.contact-form button {
+  padding: 10px 16px; /* Стиснуто */
+  font-size: 14px; /* Трохи менше */
 }
 
-.contact__details a[href*="maps"] {
-  font-size: 14px;
-  color: var(--color-muted);
-  font-style: italic;
+/* Спеціально для #contact: зменшуємо padding секції */
+#contact.section {
+  padding: 40px 0; /* Було 80px — вдвічі менше */
 }
 
-.contact__details h3 {
-  margin-top: 0;
-  margin-bottom: 18px;
+.section__header {
+  margin-bottom: 24px; /* Було 48px — стискаємо заголовок */
 }
 
-.contact__details ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 24px;
-  color: var(--color-muted);
+.section__subtitle {
+  margin-bottom: 16px; /* Додаємо менший маргін під subtitle */
 }
 
-.contact__details a {
-  color: var(--color-primary);
-  font-weight: 600;
+/* Адаптація для мобілки */
+@media (max-width: 600px) {
+  .contact__inner {
+    gap: 24px; /* Менше між формою і контактами */
+  }
+  
+  .contact-form {
+    gap: 10px; /* Ще стисліше */
+  }
+  
+  .field {
+    gap: 4px;
+    font-size: 12px;
+  }
+  
+  .field input,
+  .field select,
+  .field textarea {
+    padding: 8px 10px; /* Мінімальний */
+  }
+  
+  #contact.section {
+    padding: 20px 0; /* На мобілці ще менше */
+  }
+  
+  .section__header {
+    margin-bottom: 16px;
+  }
 }
 
 .site-footer {
@@ -577,72 +595,5 @@ img {
 
   [id] {
     scroll-margin-top: var(--header-h);
-  }
-}
-
-/* Стискаємо форму для компактності (як контакти: ~400px висоти) */
-.contact-form {
-  display: grid;
-  gap: 12px; /* Було 18px — зменшуємо відстань між полями */
-  min-height: auto; /* Не фіксуємо, але обмежуємо */
-}
-
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: 6px; /* Було 8px — ближче лейбл до поля */
-  font-size: 13px; /* Трохи менше тексту */
-}
-
-.field input,
-.field select,
-.field textarea {
-  font: inherit;
-  padding: 10px 12px; /* Було 12px 14px — стискаємо вертикально */
-  border-radius: 10px; /* Трохи менше радіус */
-  border: 1px solid var(--color-border);
-  background-color: var(--color-surface);
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.field textarea {
-  resize: vertical;
-  min-height: 80px; /* Було 120px — коротша для коментаря */
-  rows: 2; /* Додаємо в HTML, але CSS оверрайдить */
-}
-
-.field input:focus-visible,
-.field select:focus-visible,
-.field textarea:focus-visible {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 2px rgba(26, 84, 181, 0.15); /* Менший шедоу */
-  outline: none;
-}
-
-/* Кнопка компактніша */
-.contact-form button {
-  padding: 10px 16px; /* Було більше — стискаємо */
-  font-size: 14px; /* Трохи менше */
-}
-
-/* Адаптація для мобілки (щоб не вилазило за екран) */
-@media (max-width: 600px) {
-  .contact__inner {
-    gap: 24px; /* Менше між формою і контактами */
-  }
-  
-  .contact-form {
-    gap: 10px; /* Ще стисліше на маленьких екранах */
-  }
-  
-  .field {
-    gap: 4px;
-    font-size: 12px;
-  }
-  
-  .field input,
-  .field select,
-  .field textarea {
-    padding: 8px 10px; /* Мінімальний padding */
   }
 }
