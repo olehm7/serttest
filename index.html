@@ -254,6 +254,10 @@
                         <span>Коментар</span>
                         <textarea name="message" rows="2" placeholder="Можете вказати побажання, наприклад, «цікавить ГБО на Suzuki Vitara»"></textarea>
                     </label>
+                    <!-- honeypot -->
+                    <label class="field" style="display:none;">
+                    <input type="text" name="_gotcha" tabindex="-1">
+                    </label>
                     <button type="submit" class="button button--primary">Надіслати заявку</button>
                 </form>
                 <p id="form-message" style="display:none; margin-top:8px; font-weight:600;"></p>
@@ -310,12 +314,7 @@ const phoneMask = IMask(phoneInput, {
                                 submitBtn.disabled = false;
                                 submitBtn.textContent = originalText;
                             }
-                            if (!phoneMask.masked.isComplete) {
-    msg.textContent = '⚠️ Введіть повний номер телефону';
-    msg.style.color = 'red';
-    msg.style.display = 'block';
-    return;
-}
+                            
                         });
                     })();
                 </script>
@@ -364,6 +363,7 @@ const phoneMask = IMask(phoneInput, {
 </body>
 
 </html>
+
 
 
 
