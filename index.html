@@ -38,7 +38,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <script src="https://unpkg.com/imask"></script>
+    <script src="https://unpkg.com/cleave.js@latest/dist/cleave.min.js"></script>
     
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FJJ68DJ3D"></script>
@@ -271,11 +271,11 @@ dateInput.min = today;
 const maxDate = new Date(new Date().setDate(new Date().getDate() + 30)).toISOString().split('T')[0];
 dateInput.max = maxDate;
 const phoneInput = form.querySelector('input[name="phone"]');
-const phoneMask = IMask(phoneInput, {
-    mask: '+{380} (00) 000-00-00',
-    lazy: false, // Показує маску відразу
-    placeholderChar: '_', // Заповнювач для порожніх місць (опціонально)
-    overwrite: true // Дозволяє перезапис при вставці
+new Cleave(phoneInput, {
+    phone: true,
+    phoneRegionCode: 'UA',
+    delimiter: '-',
+    prefix: '+380 '
 });
 
                         form.addEventListener('submit', async (e) => {
@@ -357,6 +357,7 @@ const phoneMask = IMask(phoneInput, {
 </body>
 
 </html>
+
 
 
 
