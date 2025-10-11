@@ -278,7 +278,7 @@ const phoneInput = form.querySelector('input[name="phone"]');
 const phoneMask = IMask(phoneInput, {
     mask: '+{38} (000) 000-00-00',  // +38 фіксоване, дужки для 3 цифр (наприклад, (096))
     lazy: false,
-    placeholderChar: ' ',
+    placeholderChar: '*',
     overwrite: true
 });
 
@@ -369,6 +369,7 @@ const phoneMask = IMask(phoneInput, {
 </body>
 
 </html>
+
 
 
 
