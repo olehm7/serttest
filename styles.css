@@ -605,3 +605,7 @@ img {
     margin-top: 0; 
   }
 }
+
+.field input[type="date"] {
+  color: var(--color-text); /* Чорний колір для всього тексту в полі дати */
+}
