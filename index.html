@@ -271,39 +271,19 @@ const maxDate = new Date(new Date().setDate(new Date().getDate() + 30)).toISOStr
 dateInput.max = maxDate;
 const phoneInput = form.querySelector('input[name="phone"]');
 
-const phoneInput = form.querySelector('input[name="phone"]');
-
-const phoneInput = form.querySelector('input[name="phone"]');
-
-// Фіксація +380 з динамічним форматуванням (XX) XXX-XX-XX, стабільна версія
+// Фіксація +380 з динамічним форматуванням (XX) XXX-XX-XX
 phoneInput.value = '+380 '; // Початкове значення
-
-function formatPhone(value) {
-    let digits = value.replace(/\D/g, '').substring(3); // Беремо цифри після 380 (ігноруємо префікс)
-    if (digits.length > 9) digits = digits.substring(0, 9); // Обмежуємо 9 цифр
-    let formatted = '+380 ';
-    if (digits.length > 0) formatted += '(' + digits.substring(0,2) + ') ';
-    if (digits.length > 2) formatted += digits.substring(2,5) + '-';
-    if (digits.length > 5) formatted += digits.substring(5,7) + '-';
-    if (digits.length > 7) formatted += digits.substring(7,9);
-    return formatted;
-}
-
 phoneInput.addEventListener('input', function(e) {
-    let inputValue = e.target.value;
-    if (inputValue.startsWith('+380')) {
-        e.target.value = formatPhone(inputValue); // Форматуємо тільки після префіксу
-    } else {
-        e.target.value = '+380 ' + inputValue.replace(/\D/g, ''); // Якщо префікс зник, відновлюємо
-    }
-});
-
-// Обробка видалення для reset
-phoneInput.addEventListener('keydown', function(e) {
-    if ((e.key === 'Backspace' || e.key === 'Delete') && phoneInput.value === '+380 ') {
-        // Якщо поле порожнє після префіксу, не чіпай
-        e.preventDefault();
-    }
+    let value = e.target.value.replace(/\D/g, ''); // Видаляємо нецифрове
+    if (value.substring(0,3) === '380') value = value.substring(3); // Видаляємо 380, якщо ввели
+    else if (value.substring(0,1) === '0') value = value.substring(1); // Видаляємо 0 для UA
+    if (value.length > 9) value = value.substring(0, 9); // Обмежуємо 9 цифр
+    let formatted = '+380 ';
+    if (value.length > 0) formatted += '(' + value.substring(0,2) + ') ';
+    if (value.length > 2) formatted += value.substring(2,5) + '-';
+    if (value.length > 5) formatted += value.substring(5,7) + '-';
+    if (value.length > 7) formatted += value.substring(7,9);
+    e.target.value = formatted;
 });
                         form.addEventListener('submit', async (e) => {
                             e.preventDefault();
@@ -384,8 +364,6 @@ phoneInput.addEventListener('keydown', function(e) {
 </body>
 
 </html>
-
-
 
 
 
