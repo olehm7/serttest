@@ -272,10 +272,10 @@ const maxDate = new Date(new Date().setDate(new Date().getDate() + 30)).toISOStr
 dateInput.max = maxDate;
 const phoneInput = form.querySelector('input[name="phone"]');
 const phoneMask = IMask(phoneInput, {
-    mask: '+{380} (00) 000-00-00',  // Фіксований +380, не видаляється
-    lazy: false,  // Показує маску відразу (з плейсхолдерами _)
-    placeholderChar: '_',  // Заповнювач для порожніх цифр
-    overwrite: true  // Дозволяє перезапис при вставці номеру
+    mask: '+{380} (00) 000-00-00',  // Фіксує +380, дужки для 2 цифр (наприклад, (96))
+    lazy: false,  // Показує маску відразу
+    placeholderChar: '_',  // Заповнювач
+    overwrite: true  // Для зручної вставки
 });
 
 // Додатково: При фокусі курсор у кінець префікса
@@ -364,6 +364,7 @@ phoneInput.addEventListener('focus', () => {
 </body>
 
 </html>
+
 
 
 
