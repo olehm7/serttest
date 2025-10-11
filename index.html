@@ -38,6 +38,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/imask@7.6.1/dist/imask.min.js"></script>
     
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FJJ68DJ3D"></script>
@@ -270,20 +271,9 @@ dateInput.min = today;
 const maxDate = new Date(new Date().setDate(new Date().getDate() + 30)).toISOString().split('T')[0];
 dateInput.max = maxDate;
 const phoneInput = form.querySelector('input[name="phone"]');
-
-// Фіксація +380 з динамічним форматуванням (XX) XXX-XX-XX
-phoneInput.value = '+380 '; // Початкове значення
-phoneInput.addEventListener('input', function(e) {
-    let value = e.target.value.replace(/\D/g, ''); // Видаляємо нецифрове
-    if (value.substring(0,3) === '380') value = value.substring(3); // Видаляємо 380, якщо ввели
-    else if (value.substring(0,1) === '0') value = value.substring(1); // Видаляємо 0 для UA
-    if (value.length > 9) value = value.substring(0, 9); // Обмежуємо 9 цифр
-    let formatted = '+380 ';
-    if (value.length > 0) formatted += '(' + value.substring(0,2) + ') ';
-    if (value.length > 2) formatted += value.substring(2,5) + '-';
-    if (value.length > 5) formatted += value.substring(5,7) + '-';
-    if (value.length > 7) formatted += value.substring(7,9);
-    e.target.value = formatted;
+// Фіксований +380 з IMask.js
+IMask(phoneInput, {
+    mask: '+{380} (00) 000-00-00' // Фіксує префікс, форматує цифри
 });
                         form.addEventListener('submit', async (e) => {
                             e.preventDefault();
@@ -364,6 +354,7 @@ phoneInput.addEventListener('input', function(e) {
 </body>
 
 </html>
+
 
 
 
