@@ -38,6 +38,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/imask"></script>
     
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FJJ68DJ3D"></script>
@@ -270,55 +271,13 @@ dateInput.min = today;
 const maxDate = new Date(new Date().setDate(new Date().getDate() + 30)).toISOString().split('T')[0];
 dateInput.max = maxDate;
 const phoneInput = form.querySelector('input[name="phone"]');
-
-// Фіксація +380 з динамічним форматуванням (XX) XXX-XX-XX
-phoneInput.value = '+380 '; // Початкове значення
-
-phoneInput.addEventListener('input', function(e) {
-    const input = e.target;
-    let cursorPos = input.selectionStart; // Зберігаємо позицію курсора перед змінами
-    
-    let value = input.value.replace(/\D/g, ''); // Видаляємо нецифрове
-    if (value.startsWith('380')) value = value.substring(3); // Видаляємо 380, якщо ввели
-    else if (value.startsWith('0')) value = value.substring(1); // Видаляємо 0 для UA
-    if (value.length > 9) value = value.substring(0, 9); // Обмежуємо 9 цифр
-    
-    let formatted = '+380 ';
-    let offset = 6; // Початкова довжина '+380 '
-    
-    if (value.length > 0) {
-        formatted += '(' + value.substring(0, 2) + ') ';
-        offset += 4; // Додаємо за '('XX') '
-    }
-    if (value.length > 2) {
-        formatted += value.substring(2, 5) + '-';
-        offset += 4; // XXX-
-    }
-    if (value.length > 5) {
-        formatted += value.substring(5, 7) + '-';
-        offset += 3; // XX-
-    }
-    if (value.length > 7) {
-        formatted += value.substring(7, 9);
-        offset += 2; // XX
-    }
-    
-    // Коригуємо позицію курсора: якщо видаляли, не даємо стрибати в кінець
-    const oldLength = input.value.length;
-    const newLength = formatted.length;
-    cursorPos += (newLength - oldLength); // Коригуємо за змінами довжини
-    if (cursorPos < 6) cursorPos = 6; // Не дозволяємо курсору йти перед '+380 '
-    
-    input.value = formatted;
-    input.setSelectionRange(cursorPos, cursorPos); // Відновлюємо позицію
+const phoneMask = IMask(phoneInput, {
+    mask: '+{380} (00) 000-00-00',
+    lazy: false, // Показує маску відразу
+    placeholderChar: '_', // Заповнювач для порожніх місць (опціонально)
+    overwrite: true // Дозволяє перезапис при вставці
 });
 
-// Додатково: Обробка фокусу, щоб курсор йшов у кінець при кліку
-phoneInput.addEventListener('focus', function(e) {
-    if (e.target.value === '+380 ') {
-        e.target.setSelectionRange(e.target.value.length, e.target.value.length);
-    }
-});
                         form.addEventListener('submit', async (e) => {
                             e.preventDefault();
                             msg.style.display = 'none';
@@ -398,6 +357,7 @@ phoneInput.addEventListener('focus', function(e) {
 </body>
 
 </html>
+
 
 
 
