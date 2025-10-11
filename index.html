@@ -271,20 +271,39 @@ const maxDate = new Date(new Date().setDate(new Date().getDate() + 30)).toISOStr
 dateInput.max = maxDate;
 const phoneInput = form.querySelector('input[name="phone"]');
 
-// Фіксація +380 з динамічним форматуванням (XX) XXX-XX-XX
+const phoneInput = form.querySelector('input[name="phone"]');
+
+// Фіксований +380 з гладким форматуванням і видаленням
 phoneInput.value = '+380 '; // Початкове значення
-phoneInput.addEventListener('input', function(e) {
-    let value = e.target.value.replace(/\D/g, ''); // Видаляємо нецифрове
-    if (value.substring(0,3) === '380') value = value.substring(3); // Видаляємо 380, якщо ввели
-    else if (value.substring(0,1) === '0') value = value.substring(1); // Видаляємо 0 для UA
+phoneInput.addEventListener('input', handlePhoneInput);
+phoneInput.addEventListener('compositionupdate', handlePhoneInput); // Для мобільного вводу
+phoneInput.addEventListener('keydown', handlePhoneKeydown);
+
+function handlePhoneInput(e) {
+    const input = e.target;
+    const prefix = '+380 ';
+    let value = input.value.substring(prefix.length).replace(/\D/g, ''); // Беремо тільки цифри після префіксу
     if (value.length > 9) value = value.substring(0, 9); // Обмежуємо 9 цифр
-    let formatted = '+380 ';
+
+    let formatted = prefix;
     if (value.length > 0) formatted += '(' + value.substring(0,2) + ') ';
     if (value.length > 2) formatted += value.substring(2,5) + '-';
     if (value.length > 5) formatted += value.substring(5,7) + '-';
     if (value.length > 7) formatted += value.substring(7,9);
-    e.target.value = formatted;
-});
+
+    const cursorPos = input.selectionStart; // Зберігаємо позицію курсору
+    input.value = formatted;
+    // Відновлюємо курсор (коригування на додані символи)
+    let newPos = cursorPos + (formatted.length - input.value.length);
+    input.setSelectionRange(newPos, newPos);
+}
+
+function handlePhoneKeydown(e) {
+    const input = e.target;
+    if ((e.key === 'Backspace' || e.key === 'Delete') && input.value === '+380 ') {
+        e.preventDefault(); // Не дозволяємо видаляти префікс
+    }
+}
                         form.addEventListener('submit', async (e) => {
                             e.preventDefault();
                             msg.style.display = 'none';
@@ -364,6 +383,7 @@ phoneInput.addEventListener('input', function(e) {
 </body>
 
 </html>
+
 
 
 
