@@ -606,12 +606,10 @@ img {
   }
 }
 
-:root {
-  --header-h: 88px;               /* підберіть під свою фактичну висоту */
-  scroll-padding-top: var(--header-h);
-}
+
 
 /* на вузьких екранах хедер вищий — збільшуємо зсув */
 @media (max-width: 880px) {
   :root { --header-h: 132px; }
 }
+
