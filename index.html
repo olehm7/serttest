@@ -278,12 +278,6 @@ const phoneMask = IMask(phoneInput, {
     overwrite: true
 });
 
-// Додатково: При фокусі курсор у кінець префікса
-phoneInput.addEventListener('focus', () => {
-    if (phoneInput.value === '+380 (__) ___-__-__') {
-        phoneMask.updateCursor(6);  // Після +380 
-    }
-});
 
                         form.addEventListener('submit', async (e) => {
                             e.preventDefault();
@@ -316,6 +310,12 @@ phoneInput.addEventListener('focus', () => {
                                 submitBtn.disabled = false;
                                 submitBtn.textContent = originalText;
                             }
+                            if (!phoneMask.masked.isComplete) {
+    msg.textContent = '⚠️ Введіть повний номер телефону';
+    msg.style.color = 'red';
+    msg.style.display = 'block';
+    return;
+}
                         });
                     })();
                 </script>
@@ -364,6 +364,7 @@ phoneInput.addEventListener('focus', () => {
 </body>
 
 </html>
+
 
 
 
