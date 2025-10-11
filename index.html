@@ -38,7 +38,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <script src="https://unpkg.com/cleave.js@latest/dist/cleave.min.js"></script>
+    <script src="https://unpkg.com/imask"></script>
     
     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-5FJJ68DJ3D"></script>
@@ -271,11 +271,18 @@ dateInput.min = today;
 const maxDate = new Date(new Date().setDate(new Date().getDate() + 30)).toISOString().split('T')[0];
 dateInput.max = maxDate;
 const phoneInput = form.querySelector('input[name="phone"]');
-new Cleave(phoneInput, {
-    phone: true,
-    phoneRegionCode: 'UA',
-    delimiter: '-',
-    prefix: '+380 '
+const phoneMask = IMask(phoneInput, {
+    mask: '+{380} (00) 000-00-00',  // Фіксований +380, не видаляється
+    lazy: false,  // Показує маску відразу (з плейсхолдерами _)
+    placeholderChar: '_',  // Заповнювач для порожніх цифр
+    overwrite: true  // Дозволяє перезапис при вставці номеру
+});
+
+// Додатково: При фокусі курсор у кінець префікса
+phoneInput.addEventListener('focus', () => {
+    if (phoneInput.value === '+380 (__) ___-__-__') {
+        phoneMask.updateCursor(6);  // Після +380 
+    }
 });
 
                         form.addEventListener('submit', async (e) => {
@@ -357,6 +364,7 @@ new Cleave(phoneInput, {
 </body>
 
 </html>
+
 
 
 
