@@ -278,7 +278,7 @@ const phoneInput = form.querySelector('input[name="phone"]');
 const phoneMask = IMask(phoneInput, {
     mask: '+{38} (000) 000-00-00',  // +38 фіксоване, дужки для 3 цифр (наприклад, (096))
     lazy: false,
-    placeholderChar: '_',
+    placeholderChar: ' ',
     overwrite: true
 });
 
@@ -286,6 +286,12 @@ const phoneMask = IMask(phoneInput, {
                         form.addEventListener('submit', async (e) => {
                             e.preventDefault();
                             msg.style.display = 'none';
+                            if (!phoneMask.masked.isComplete) {
+                                msg.textContent = '⚠️ Введіть повний номер телефону';
+                                msg.style.color = 'red';
+                                msg.style.display = 'block';
+                                return;  // Перериваємо submit
+        }
                             const originalText = submitBtn.textContent;
                             submitBtn.disabled = true;
                             submitBtn.textContent = 'Відправляємо…';
@@ -363,6 +369,7 @@ const phoneMask = IMask(phoneInput, {
 </body>
 
 </html>
+
 
 
 
