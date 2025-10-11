@@ -275,12 +275,16 @@ dateInput.min = today;
 const maxDate = new Date(new Date().setDate(new Date().getDate() + 30)).toISOString().split('T')[0];
 dateInput.max = maxDate;
 const phoneInput = form.querySelector('input[name="phone"]');
-const phoneMask = IMask(phoneInput, {
-    mask: '+{38} (000) 000-00-00',  // +38 фіксоване, дужки для 3 цифр (наприклад, (096))
-    lazy: false,
-    placeholderChar: '*',
-    overwrite: true
+                        const phoneMask = IMask(phoneInput, {
+    mask: /^\+380 \(\d{2}\) \d{3}-\d{2}-\d{2}$/,  // Валідує формат без плейсхолдера
+    lazy: true
 });
+//const phoneMask = IMask(phoneInput, {
+//    mask: '+{38} (000) 000-00-00',  // +38 фіксоване, дужки для 3 цифр (наприклад, (096))
+//    lazy: false,
+//    placeholderChar: '*',
+//   overwrite: true
+//});
 
 
                         form.addEventListener('submit', async (e) => {
@@ -369,6 +373,7 @@ const phoneMask = IMask(phoneInput, {
 </body>
 
 </html>
+
 
 
 
