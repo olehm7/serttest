@@ -606,14 +606,12 @@ img {
   }
 }
 
-.field input[type="date"] {
-  color: var(--color-text); /* Чорний колір для всього тексту в полі дати */
+:root {
+  --header-h: 88px;               /* підберіть під свою фактичну висоту */
+  scroll-padding-top: var(--header-h);
 }
 
-.field input[type="date"]::-webkit-datetime-edit {
-  color: var(--color-text); /* Чорний для року/місяця/дня в shadow DOM */
-}
-
-.field input[type="date"]::-webkit-datetime-edit-fields-wrapper {
-  color: var(--color-text); /* Обгортка для всіх частин дати */
+/* на вузьких екранах хедер вищий — збільшуємо зсув */
+@media (max-width: 880px) {
+  :root { --header-h: 132px; }
 }
