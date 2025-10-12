@@ -49,6 +49,48 @@
 
   gtag('config', 'G-5FJJ68DJ3D');
 </script>
+<style>
+  .hero__media.carousel{
+    position: relative;
+    width: 100%;
+    /* Фіксуємо співвідношення сторін, щоб висота не стрибала */
+    aspect-ratio: 16 / 9;         /* можна 3/2 або 21/9 — як вам пасує */
+    max-height: 520px;            /* опційно, ліміт зверху */
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .carousel__slide{
+    position: absolute;
+    inset: 0;                     /* top:0; right:0; bottom:0; left:0 */
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+  .carousel__slide.active{ opacity: 1; }
+
+  .carousel__slide img{
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;            /* “накриває” контейнер без спотворень */
+    object-position: center;
+  }
+
+  .carousel__caption{
+    position: absolute;
+    left: 5%;
+    bottom: 12%;
+    background: rgba(0,0,0,.55);
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+.hero__media.carousel{
+	height: 420px;
+ }
+</style>
 </head>
 
 <body>
@@ -87,9 +129,20 @@
                         <a class="button button--ghost" href="#services">Наші послуги</a>
                     </div>
                 </div>
-                <div class="hero__media">
-                    <img src="img/7.webp" alt="Спеціалісти проводять вимірювання на станції техогляду" loading="lazy" />
-                </div>
+                <div class="hero__media carousel">
+  <div class="carousel__slide active">
+    <img src="img/1.webp" alt="Станція техобслуговування у Львові" decoding="async" fetchpriority="high">
+    <div class="carousel__caption">Станція у Львові</div>
+  </div>
+  <div class="carousel__slide">
+    <img src="img/2.webp" alt="Станція техобслуговування в Мукачево" loading="lazy">
+    <div class="carousel__caption">Станція в Мукачево</div>
+  </div>
+  <div class="carousel__slide">
+    <img src="img/7.webp" alt="Станція техобслуговування в селі Дуліби" loading="lazy">
+    <div class="carousel__caption">Станція в Дулібах</div>
+  </div>
+</div>
             </div>
         </section>
 
@@ -369,6 +422,18 @@ const phoneMask = IMask(phoneInput, {
             <a href="privacy.html">Політика конфіденційності</a>
         </div>
     </footer>
+<script>
+  // Простая автоматическая карусель
+  document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll(".carousel__slide");
+    let index = 0;
+    setInterval(() => {
+      slides[index].classList.remove("active");
+      index = (index + 1) % slides.length;
+      slides[index].classList.add("active");
+    }, 4000); // смена каждые 4 секунды
+  });
+</script>
 </body>
 
 </html>
