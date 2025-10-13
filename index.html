@@ -6,31 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="img/icons8-car-100.ico">
     <title>Техогляд та сертифікація авто — Львів, Івано-Франківськ, Мукачево, Дуліби</title>
-    <!-- <title>Станція техогляду ОТК</title> -->
-    <!-- Description (SEO) -->
     <meta name="description" content="Ліцензована станція техогляду та сертифікації авто у Львові, Івано-Франківську, Мукачево та Дулібах. Проводимо обов’язковий техконтроль та сертифікацію усіх категорій авто. ☎ +38 (096) 556-55-05.">
 
-    <!-- Keywords -->
+    
     <meta name="keywords" content="техогляд авто Львів, технічний контроль, сертифікація авто Львів, техогляд Львів, техогляд Івано-Франківськ, техогляд Мукачево, техогляд Дуліби, обов’язковий техогляд, ОТК Львів, Данила апостола сертифікація, сертифікація транспортних засобів Львів, Сертифікація Івано-Франківськ, сертифікат відповідності Львів">
 
-    <!-- Robots -->
+    <meta http-equiv="Cache-Control" content="max-age=0, no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
     <meta name="robots" content="index, follow">
     <meta name="language" content="uk">
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://otk.org.ua/">
-
-	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
+    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" as="style">
     <link rel="preload" href="styles.css" as="style">
 
-    <!-- Open Graph / Facebook -->
+  
+    <link rel="canonical" href="https://otk.org.ua/">
+
+    
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://otk.org.ua/">
     <meta property="og:title" content="Техогляд та сертифікація авто — Львів, Івано-Франківськ, Мукачево, Дуліби">
     <meta property="og:description" content="Ліцензована станція техогляду. Обов’язковий технічний контроль авто всіх категорій, сертифікація, документи для МВС. Телефонуйте: +38 (096) 556-55-05.">
     <meta property="og:image" content="https://otk.org.ua/img/preview.jpg">
 
-    <!-- Twitter / X -->
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://otk.org.ua/">
     <meta name="twitter:title" content="Техогляд та сертифікація авто — Львів, Івано-Франківськ, Мукачево, Дуліби">
@@ -58,8 +59,6 @@
     <header class="site-header">
         <div class="container site-header__inner">
             <nav class="top">
-                <!--                <span class="logo__mark">ОТК</span>
-                <span class="logo__text">Станція технічного контролю</span> -->
                 <a href="index.html"><span class="logo__mark">Станція технічного контролю</span></a>
             </nav>
             <nav class="main-nav" aria-label="Головна навігація">
@@ -224,7 +223,7 @@
     <div class="container">
          <div class="contact__inner">
         <div class="contact__content">
-        <header class="section__header" style="margin-bottom: 8px;"> <!-- Inline-style для зменшення відступу до форми -->
+        <header class="section__header" style="margin-bottom: 8px;"> 
             <p class="section__eyebrow">Зв'яжіться з нами</p>
             <h2 class="section__title">Запис на техогляд або сертифікацію</h2>
             <p class="section__subtitle">
@@ -271,20 +270,20 @@
                         const submitBtn = form.querySelector('button[type="submit"]');
                         const dateInput = form.querySelector('input[name="date"]');
 
-// Авто-дата: встановлюємо сьогодні з обмеженням +30 днів
-const today = new Date().toISOString().split('T')[0];
-dateInput.value = today;
-dateInput.min = today;
-const maxDate = new Date(new Date().setDate(new Date().getDate() + 30)).toISOString().split('T')[0];
-dateInput.max = maxDate;
-const phoneInput = form.querySelector('input[name="phone"]');
 
-const phoneMask = IMask(phoneInput, {
-    mask: '+{38} (000) 000-00-00',  // +38 фіксоване, дужки для 3 цифр (наприклад, (096))
-    lazy: false,
-    placeholderChar: '_',
-   overwrite: true
-});
+                        const today = new Date().toISOString().split('T')[0];
+                        dateInput.value = today;
+                        dateInput.min = today;
+                        const maxDate = new Date(new Date().setDate(new Date().getDate() + 30)).toISOString().split('T')[0];
+                        dateInput.max = maxDate;
+                        const phoneInput = form.querySelector('input[name="phone"]');
+
+                        const phoneMask = IMask(phoneInput, {
+                         mask: '+{38} (000) 000-00-00',  
+                         lazy: false,
+                         placeholderChar: '_',
+                      overwrite: true
+                        });
 
 
                         form.addEventListener('submit', async (e) => {
@@ -294,7 +293,7 @@ const phoneMask = IMask(phoneInput, {
                                 msg.textContent = '⚠️ Введіть повний номер телефону';
                                 msg.style.color = 'red';
                                 msg.style.display = 'block';
-                                return;  // Перериваємо submit
+                                return;  
         }
                             const originalText = submitBtn.textContent;
                             submitBtn.disabled = true;
@@ -375,7 +374,6 @@ const phoneMask = IMask(phoneInput, {
 </body>
 
 </html>
-
 
 
 
